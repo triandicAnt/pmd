@@ -108,6 +108,10 @@ private class ATest {
     static void methodBTest() {
     }
     @isTest static void methodCTest() {
+        System.assert(1==2);
+    }
+    @isTest static void methodCTest() {
+        System.debug('I am a debug statement');
     }
     private void fetchData() {
     }
