@@ -244,5 +244,22 @@ while (true) {  // preferred approach
 ]]>
         </example>
     </rule>
-
+    <rule name="BooleanMethodNamingConventions"
+          since="6.13.0"
+          message="Boolean method name does not begin with ANY(‘is’, ‘has’, ‘can’, ‘will’, ‘should’)."
+          class="net.sourceforge.pmd.lang.apex.rule.codestyle.BooleanMethodNamingConventionsRule"
+          externalInfoUrl="${pmd.website.baseurl}/pmd_rules_apex_codestyle.html#booleanmethodnamingconventions">
+        <description>
+            Boolean Method names should always begin with ANY(‘is’, ‘has’, ‘can’, ‘will’, ‘should’) prefix.
+        </description>
+        <priority>1</priority>
+        <example>
+            <![CDATA[
+public class Foo {
+    public Boolean fooStuff() {
+    }
+}
+]]>
+        </example>
+    </rule>
 </ruleset>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<test-data
+        xmlns="http://pmd.sourceforge.net/rule-tests"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://pmd.sourceforge.net/rule-tests http://pmd.sourceforge.net/rule-tests_1_0_0.xsd">
+
+    <test-code>
+        <description>Boolean method should start with ANY(‘is’, ‘has’, ‘can’, ‘will’, ‘should’).</description>
+        <expected-problems>2</expected-problems>
+        <expected-linenumbers>2,5</expected-linenumbers>
+        <code><![CDATA[
+public class Foo {
+	Boolean bar() {}
+	Boolean isActive() {}
+	Boolean canGo() {}
+	Boolean biz(Boolean x) {}
+}
+		]]></code>
+    </test-code>
+
+    <test-code>
+        <description>all is well</description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+public class Foo {
+	void myMethod(Boolean x) {}
+}
+		]]></code>
+    </test-code>
+
+    <test-code>
+        <description>all is well</description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+public class Foo {
+	Boolean isActive() {}
+	Boolean canPass() {}
+}
+		]]></code>
+    </test-code>
+
+    <test-code>
+        <description> BooleanMethodNamingConventions for overridden methods</description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+public class MethodNamingConventions implements SomeInterface {
+    @Override
+    public Boolean baz() {}
+}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Method rules should ignore Property Getter/Setter</description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+public class Foo {
+    public Boolean property { get; private set; }
+}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Check for test methods as well</description>
+        <expected-problems>1</expected-problems>
+        <expected-linenumbers>5</expected-linenumbers>
+        <code><![CDATA[
+@isTest
+public class Foo {
+    @isTest
+    void getBar() {}
+    Boolean getBar() {}
+}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>#26 Constructors should not trigger "Boolean Method names should not start ANY(‘is’, ‘has’, ‘can’, ‘will’, ‘should’)" issue</description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+public class Foo {
+    public Foo() {}
+}
+        ]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Boolean methods with params should skip rule if skipMethodsWithParameters is True</description>
+        <rule-property name="skipMethodsWithParameters">true</rule-property>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+public class Foo {
+    Boolean getSomething(String x) {}
+}
+		]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Boolean methods without params should not skip rule if skipMethodsWithParameters is True</description>
+        <rule-property name="skipMethodsWithParameters">true</rule-property>
+        <expected-problems>1</expected-problems>
+        <expected-linenumbers>2</expected-linenumbers>
+        <code><![CDATA[
+public class Foo {
+    Boolean getSomething() {}
+}
+		]]></code>
+    </test-code>
+
+    <test-code>
+        <description>Boolean test methods should not skip rule if skipMethodsWithParameters is False</description>
+        <rule-property name="skipMethodsWithParameters">false</rule-property>
+        <expected-problems>2</expected-problems>
+        <expected-linenumbers>5,6</expected-linenumbers>
+        <code><![CDATA[
+@isTest
+public class Foo {
+    @isTest
+    void test_barFoo() {}
+    Boolean findBar(String x) {}
+    Boolean getBar() {}
+}
+		]]></code>
+    </test-code>
+</test-data>
