@@ -76,5 +76,26 @@ public class Something {
 ]]>
         </example>
     </rule>
+    <rule name="AvoidInstantiatingObjectsInLoops"
+          since="6.13.0"
+          message="Avoid instantiating objects inside loops"
+          class="net.sourceforge.pmd.lang.apex.rule.performance.AvoidInstantiatingObjectsInLoopsRule"
+          externalInfoUrl="${pmd.website.baseurl}/pmd_rules_apex_performance.html#avoidinstantiatingobjectsinloops">
+        <description>
+            Just avoid.
+        </description>
+        <priority>3</priority>
+        <example>
+            <![CDATA[
+public class Something {
+    public static void main( String as[] ) {
+        for (Integer i = 0; i < 10; i++) {
+            String s = new String();
+        }
+    }
+}
+]]>
+        </example>
+    </rule>
 
 </ruleset>
